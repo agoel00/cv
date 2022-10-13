@@ -1,0 +1,437 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A clean template for an academic CV
+%
+% Uses tabularx to create two column entries (date and job/edu/citation).
+% Defines commands to make adding entries simpler.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt, a4paper]{article}
+
+% Full Unicode support for non-ASCII characters
+\usepackage[utf8]{inputenc}
+
+% Useful aliases
+\newcommand{\UERJ}{Universidade do Estado do Rio de Janeiro}
+\newcommand{\UHM}{University of Hawai`i at M\={a}noa}
+\newcommand{\SOEST}{School of Ocean and Earth Science and Technology}
+\newcommand{\UHEARTH}{Department of Earth Sciences}
+\newcommand{\LIVEARTH}{Department of Earth, Ocean and Ecological Sciences}
+\newcommand{\LIVENV}{School of Environmental Sciences}
+\newcommand{\LIV}{University of Liverpool}
+
+% Identifying information
+\newcommand{\Title}{Curriculum Vit\ae}
+\newcommand{\FirstName}{Anmol}
+\newcommand{\LastName}{Goel}
+\newcommand{\Initials}{A}
+\newcommand{\MyName}{\FirstName\ \LastName}
+\newcommand{\Me}{\textbf{\LastName, \Initials}}  % For citations
+\newcommand{\Email}{anmol.goel@research.iiit.ac.in}
+\newcommand{\PersonalWebsite}{www.anmolg.me}
+\newcommand{\LabWebsite}{www.precog.iiit.ac.in}
+\newcommand{\ORCID}{0000-0001-6123-9515}
+\newcommand{\Address}{
+  Jane Herdman Building \\ 4 Brownlow Street \\ Liverpool, L69 3GP \\ United Kingdom
+}
+
+% Names for citing coauthors
+
+
+
+% Template configuration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Disable hyphenation
+\usepackage[none]{hyphenat}
+
+% Control the font size
+\usepackage{anyfontsize}
+
+% Icon fonts (requires using xelatex or luatex)
+\usepackage[fixed]{fontawesome5}
+\usepackage{academicons}
+
+% Template variables for styling
+\newcommand{\TablePad}{\vspace{-0.4cm}}
+\newcommand{\SoftwareTitle}[1]{{\bfseries #1}}
+\newcommand{\TableTitle}[1]{{\fontsize{12pt}{0}\selectfont \itshape #1}}
+
+% For fancy and multipage tables
+\usepackage{tabularx}
+\usepackage{ltablex}
+
+% Define a new environment to place all CV entries in a 2-column table.
+% Left column are the dates, right column the entries.
+\usepackage{environ}
+\NewEnviron{EntriesTable}{
+\TablePad
+\begin{tabularx}{\textwidth}{@{}p{0.10\textwidth}@{\hspace{0.02\textwidth}}p{0.88\textwidth}@{}}
+  \BODY
+\end{tabularx}
+}
+\NewEnviron{EntriesTableExtra}{
+\TablePad
+\begin{tabularx}{\textwidth}{@{}p{0.10\textwidth}@{\hspace{0.02\textwidth}}p{0.79\textwidth}@{\hspace{0.02\textwidth}}>{\raggedright\arraybackslash}p{0.07\textwidth}}
+  \BODY
+\end{tabularx}
+}
+
+% Macros to add links and mark publications
+\newcommand{\DOI}[1]{doi:\href{https://doi.org/#1}{#1}}
+\newcommand{\DOILink}[1]{\href{https://doi.org/#1}{doi.org/#1}}
+\newcommand{\Website}[1]{\href{https://#1}{#1}}
+\newcommand{\Preprint}[1]{\href{https://doi.org/#1}{\faFilePdf}}
+\newcommand{\PaperLink}[1]{\href{#1}{\faFilePdf}}
+\newcommand{\Youtube}[1]{\href{https://www.youtube.com/watch?v=#1}{\faYoutube}}
+\newcommand{\GitHub}[1]{\href{https://github.com/#1}{\faGithub}}
+\newcommand{\Data}[1]{\href{#1}{\faChartLine}}
+\newcommand{\Slides}[1]{\href{https://#1}{\faTv}}
+\newcommand{\SlidesDOI}[1]{\href{https://doi.org/#1}{\faTv}}
+\newcommand{\PosterDOI}[1]{\href{https://doi.org/#1}{\faImage}}
+\newcommand{\Poster}[1]{\href{#1}{\faImage}}
+\newcommand{\OA}{\thinspace\aiOpenAccess\enspace}
+
+% Macros to set the year and duration on the left column
+\newcommand{\Duration}[2]{\fontsize{9pt}{0}\selectfont #1 -- #2}
+\newcommand{\Year}[1]{\fontsize{9pt}{0}\selectfont #1}
+\newcommand{\Ongoing}{on}
+\newcommand{\Future}{future}
+\newcommand{\Appointment}[4]{\textbf{#1} \newline #2 \newline #3 \newline #4}
+
+% Define command to insert month name and year as date
+\usepackage{datetime}
+\newdateformat{monthyear}{\monthname[\THEMONTH], \THEYEAR}
+
+% Set the page margins
+\usepackage[a4paper,margin=1.5cm,includehead,headsep=5mm]{geometry}
+
+% To get the total page numbers (\pageref{LastPage})
+\usepackage{lastpage}
+
+% No indentation
+\setlength\parindent{0cm}
+
+% Increase the line spacing
+\renewcommand{\baselinestretch}{1.2}
+% and the spacing between rows in tables
+\renewcommand{\arraystretch}{1.5}
+
+% Remove space between items in itemize and enumerate
+\usepackage{enumitem}
+\setlist{nosep}
+
+% Use custom colors
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% Set fonts (requires compilation with xelatex)
+\usepackage{fontspec}
+\setmainfont[%
+  Path = fonts/notoserif/,
+  UprightFont = NotoSerif-Regular,
+  BoldFont = NotoSerif-Bold,
+  ItalicFont = NotoSerif-Italic,
+  Extension = .ttf
+]{NotoSerif}
+
+
+
+% Set the spacing for sections
+\usepackage{titlesec}
+\titleformat{\section}
+  {\normalfont\Large\mdseries} % format
+  {} % label
+  {0pt} % separation (left separation for hang)
+  {} % text before title
+  [\titlerule] % text after title
+\titleformat{\subsection}
+  {\normalfont\large\mdseries} % format
+  {} % label
+  {0pt} % separation (left separation for hang)
+  {} % text before title
+
+% Disable number of sections. Use this instead of "section*" so that the sections still
+% appear as PDF bookmarks. Otherwise, would have to add the table of contents entries
+% manually.
+\makeatletter
+\renewcommand{\@seccntformat}[1]{}
+\makeatother
+
+% Set fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\fontsize{9pt}{10pt}\selectfont
+  \monthyear\today
+}
+\chead{
+  \fontsize{9pt}{10pt}\selectfont
+  \MyName
+  \hspace{0.2cm} -- \hspace{0.2cm}
+  \Title
+}
+\rhead{\fontsize{9pt}{10pt}\selectfont \thepage{} of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+% Metadata for the PDF output and control of hyperlinks
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{
+  pdftitle={\MyName\ - \Title},
+  pdfauthor={\MyName},
+  linkcolor=blue,
+  citecolor=blue,
+  filecolor=black,
+  urlcolor=MidnightBlue
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+% No header for the first page
+\thispagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.7\textwidth}
+{\fontsize{22pt}{0}\selectfont\MyName}
+\end{minipage}
+\begin{minipage}[t]{0.3\textwidth}
+  \begin{flushright}
+    Last updated: \monthyear\today
+  \end{flushright}
+\end{minipage}
+\\[-0.1cm]
+\rule{\textwidth}{2pt}
+\\[0.1cm]
+\begin{minipage}[t]{0.7\textwidth}
+    % ORCID: \href{https://orcid.org/\ORCID}{\ORCID}
+    % \\
+    Email: \href{mailto:\Email}{\Email}
+    \\
+    Research group: \Website{\LabWebsite}
+    \\
+    Website: \Website{\PersonalWebsite}
+\end{minipage}
+\begin{minipage}[t]{0.3\textwidth}
+  \begin{flushright}
+    Natural Language Processing \\ 
+    Computational Social Science \\
+    Causal Inference
+  \end{flushright}
+\end{minipage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Education}
+
+\begin{EntriesTable}
+  \Duration{2022}{\Ongoing}  &
+  \textbf{MS by Research (CSE)}, IIIT Hyderabad | CGPA: 9.5/10
+  \\
+  \Duration{2017}{2021}  &
+  \textbf{Bachelor of Technology (CSE)}, Guru Gobind Singh Indraprashta University, Delhi | CGPA: 8.85/10 
+\end{EntriesTable}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experience}
+
+\begin{EntriesTable}
+  \Duration{Jun'21}{\Ongoing}  &
+  \Appointment{Research Associate - IIIT Hyderabad}{Centre for Computational Social Science}{Advised by Prof. PK}{Worked on Long Document Summarization and linguistically-motivated NLP algorithms for Indian Languages.}
+  \\
+  \Duration{Jan'20}{May'20}  &
+  \Appointment{Research Intern - IIIT Delhi}{Precog Lab}{Advised by Prof. PK}{Worked on canonicalization of industry-scale knowledge graphs and studied linguistic evolution through lexical semantic change.}
+  \\
+  \Duration{May'19}{Aug'19}  &
+  \Appointment{Research Intern}{Wellowise}{Advised by Dr. Saher Mehdi}{Developed large scale medical domain NLP and graph based algorithms for disease diagnosis.}
+  \\
+  \Duration{May'18}{Jun'18}  &
+  \Appointment{Summer Intern}{Defence Research and Development Organisation (DRDO)}{Advised by Dr. Chanchal Sharma}{Explored methods to model real-time epitaxy data from Solid State Physics Laboratory.}
+\end{EntriesTable}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Publications}
+
+\subsection{Conference Proceedings}
+
+\begin{EntriesTableExtra}
+\Year{2022}  &
+  \textbf{Anmol Goel}, Charu Sharma, Ponnurangam Kumaraguru.
+  An Unsupervised, Geometric and Syntax-aware Quantification of Polysemy.
+  \emph{In Empirical Methods in Natural Language Processing (EMNLP)}.
+  &
+  \PaperLink{https://precog.iiit.ac.in/pubs/emnlp_polysemy.pdf}
+  \\
+  ~ &
+  Prashant Kodali, \textbf{Anmol Goel}, Monojit Choudhury, Manish Shrivastava, Ponnurangam Kumaraguru.
+  SyMCoM - Syntactic Measure of Code Mixing A Study Of English-Hindi Code-Mixing.
+  \emph{In Findings of Association for Computational Linguistics (ACL)}.
+  \DOI{10.18653/v1/2022.findings-acl.40}
+  &
+  \OA
+  \PaperLink{https://aclanthology.org/2022.findings-acl.40/}
+  \Slides{https://precog.iiit.ac.in/pubs/SyMCoM-ACL2022-presentation.pdf}
+  \Poster{https://precog.iiit.ac.in/pubs/SYMCOM-POSTER.pdf}
+  \\
+  ~ &
+  Arnav Kapoor, Mudit Dhawan, \textbf{Anmol Goel}, Arjun TH, Akshala Bhatnagar, Vibhu Agrawal, Amul Agrawal, Arnab Bhattacharya, Ponnurangam Kumaraguru, Ashutosh Modi.
+  HLDC: Hindi Legal Documents Corpus.
+  \emph{In Findings of Association for Computational Linguistics (ACL)}.
+  \DOI{10.18653/v1/2022.findings-acl.278}.
+  &
+  \OA
+  \GitHub{Exploration-Lab/HLDC}
+  \PaperLink{https://aclanthology.org/2022.findings-acl.278/}
+  \\
+  ~ &
+  Udit Arora, Nidhi Goyal, \textbf{Anmol Goel}, Niharika Sachdeva, Ponnurangam Kumaraguru.
+  Ask It Right! Identifying Low-Quality questions on Community Question Answering Services.
+  \emph{In International Joint Conference on Neural Networks (IJCNN)}.
+  \DOI{10.1109/IJCNN55064.2022.9892454}.
+  &
+  \PaperLink{https://ieeexplore.ieee.org/document/9892454}
+  \Data{https://precog.iiit.ac.in/resources.html}
+  \\
+\Year{2021}  &
+  Nidhi Goyal, Niharika Sachdeva, \textbf{Anmol Goel}, Jushaan Kalra, Ponnurangam Kumaraguru. 
+  KCNet: Kernel-based Canonicalization Network for entities in Recruitment Domain.
+  \emph{In 30th International Conference on Artificial Neural Networks (ICANN)}.
+  \DOI{10.1007/978-3-030-86340-1\_13}.
+  &
+  \PaperLink{https://precog.iiit.ac.in/pubs/2021_July_KCNet.pdf}
+  \Slides{https://precog.iiit.ac.in/pubs/2021_July_KCNet-slides.pdf}
+\end{EntriesTableExtra}
+
+
+\subsection{Workshop Publications}
+
+\begin{EntriesTableExtra}
+\Year{2021}  &
+  \textbf{Anmol Goel}, Ponnurangam Kumaraguru.
+  Detecting Lexical Semantic Change across Corpora with Smooth Manifolds (Student Abstract).
+  \emph{In AAAI 2021 Student Track. Finalist for Best Student Paper Award.}
+  \DOI{10.1609/aaai.v35i18.17888}
+  &
+  \OA
+  \PaperLink{https://ojs.aaai.org/index.php/AAAI/article/view/17888}
+  \Slides{https://precog.iiit.ac.in/pubs/2020_Nov_smooth_manifolds_for_lexical_semantic_change.pdf}
+  \\
+  ~ &
+  \textbf{Anmol Goel}, Ponnurangam Kumaraguru.
+  A Geometric Measure of Polysemy in Hindi Language.
+  \emph{In ACM CODS COMAD}
+  \DOI{10.1145/3430984.3431044}
+  &
+  \OA
+  \PaperLink{https://dl.acm.org/doi/abs/10.1145/3430984.3431044}
+  \Slides{https://precog.iiit.ac.in/pubs/2021_Jan_Geometric_Polysemy_Slides.pdf}
+  \\
+  ~ &
+  Devansh Gautam, Prashant Kodali, Kshitij Gupta, \textbf{Anmol Goel}, Manish Shrivastava, Ponnurangam Kumaraguru.
+  CoMeT: Towards Code-Mixed Translation Using Parallel Monolingual Sentences.
+  \emph{In CALCS colocated with NAACL}
+  \DOI{10.18653/v1/2021.calcs-1.7}
+  &
+  \OA
+  \PaperLink{https://aclanthology.org/2021.calcs-1.7/}
+
+\end{EntriesTableExtra}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Academic Service}
+
+\subsection{Reviewer}
+
+\begin{itemize}
+  \item EMNLP 2022
+  \item EMNLP 2022 Industry Track
+  \item NAACL 2022 Industry Track
+\end{itemize}
+
+\subsection{Sub Reviewer}
+
+\begin{itemize}
+  \item ICML 2022
+  \item ACML 2022
+  \item CODS COMAD 2022
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Teaching}
+
+\subsection{Teaching Assistant}
+
+\begin{EntriesTableExtra}
+  \Year{2022}  &
+  Summer Institute in Computational Social Science (SICSS)
+  \newline
+  Handled tutorials, hands-on sessions and guest lectures
+  \newline
+  \textit{IIIT Hyderabad}
+  & ~
+\end{EntriesTableExtra}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Awards \& Honors}
+
+\begin{EntriesTable}
+  \Year{2020}  &
+  NeurIPS, ICML and ACL Travel Grant
+  \\
+  \Year{2020}  &
+  Accepted into RegML Summer School
+  \\
+  \Year{2021}  &
+  Received Udacity Intel AI Scholarship
+\end{EntriesTable}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Miscellaneous}
+
+
+\subsection{Languages}
+
+\TablePad
+\begin{tabularx}{\textwidth}{@{}p{0.15\textwidth} p{0.85\textwidth}@{}}
+  Hindi & Native
+  \\
+  English & CBSE 12th Standard
+  \\
+  French & CBSE 10th Standard
+  % IELTS: CEFR Level C2 (mastery or proficiency) obtained in 2019
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Glossary}
+
+These are the meanings of the symbols used throughout this document:
+\\
+\TablePad
+\begin{tabularx}{\textwidth}{@{}p{0.03\textwidth} p{0.97\textwidth}@{}}
+  \aiOpenAccess & Indicates that a publication is open-access
+  \\
+  \faGithub & Link to a code repository on GitHub
+  \\
+  \faFilePdf & Link to an open-access PDF, usually a preprint or postprint
+  \\
+  \faYoutube & Link to a video on YouTube
+  \\
+  \faChartLine & Link to a data archive
+  \\
+  \faTv & Link to presentation slides
+  \\
+  \faImage & Link to a poster
+\end{tabularx}
+
+\end{document}
